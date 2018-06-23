@@ -66,13 +66,15 @@ void MainWindow::on_tableWidget_cellDoubleClicked(int row, int column)
    else if(name!="hello"){
         if(column==0){
            ui->tableWidget->setItem(row,0,new QTableWidgetItem(name+" \t*"+"\n"+date_catch));
-        //archivio_(date_as_qdate,name);
-           reg(1,map1,date_as_qdate,name);
+        map1.insert(pair<QDate,QString>(date_as_qdate,name));
+
           }
         else{
                 ui->tableWidget->setItem(row, column, new QTableWidgetItem(name));//+"\n"+date_catch));
                // archivio_2(date_as_qdate,name);
-                reg(2,map2,date_as_qdate,name);
+                map2.insert(pair<QDate,QString>( date_as_qdate,name));
+                mapdate.insert(pair<int,QDate>(ui->tableWidget->currentRow(),date_as_qdate));
+                mapnames.insert(pair<int,QString>(ui->tableWidget->currentColumn(),name));
 
 
     }
@@ -110,7 +112,7 @@ void MainWindow::on_pushButton_clicked()
             if(col==0 ){
                 ui->tableWidget->setItem(row,col, new QTableWidgetItem(new_name+"*\n"+ date_as_str));
                 //archivio_(date_as_qdate,new_name);
-                registro(1,map1,date_as_qdate,new_name);
+                //registro(1,map1,date_as_qdate,new_name);
             }
             else{
             ui->tableWidget->setItem(row,col, new QTableWidgetItem(new_name+"\n"+ date_as_str));
@@ -124,8 +126,25 @@ void MainWindow::on_pushButton_2_clicked()
 {
   ui->tableWidget->setItem(ui->tableWidget->currentRow(), ui->tableWidget->currentColumn(), new QTableWidgetItem(""));
 
+      for(auto it=map1.begin(); it!=map1.end();++it){
+          int col,row;
+          col=ui->tableWidget->currentColumn();
+          row=ui->tableWidget->currentRow();
+         // QString name_searched=multmap_search(col);
+           auto itr= mapdate.find(col);
+           QDate giorno_sel;
+           giorno_sel=itr->second;                  //i shoulf fix something here but i can't understand what
+         // QDate date_searched=multmap_search_date(row);
+            auto itrt= mapnames.find(row);
+        //  multmap_order_66(name_searched);
+        auto itrtr= map1.find(giorno_sel);
+                map1.erase(itrtr);
 
-}
+
+      }
+  }
+
+
 
 
 
@@ -146,26 +165,6 @@ void MainWindow::refreshtime(){
          QTime time = QTime::currentTime();
          ui->label_2->setText(time.toString());
          refreshdate();
-         /*qDebug()<< "\nThe multimap element is : \n";
-         qDebug()<< "\tKEY\tELEMENT\n";
-         for ( auto itr = map1.begin(); itr != map1.end(); ++itr)
-                 {
-                     qDebug()<<  '\t' << itr->first
-                           <<  '\t' << itr->second << '\n';
-                 }
-         qDebug()<< endl;
-         qDebug()<< "\nThe multimap 2 element is : \n";
-         qDebug()<< "\tKEY\tELEMENT\n";
-         for ( auto itr = map2.begin(); itr != map2.end(); ++itr)
-                 {
-                     qDebug()<<  '\t' << itr->first
-                           <<  '\t' << itr->second << '\n';
-                 }
-         qDebug()<< endl;
-
-
-*/
-
         print_on_screen();
 
 }
@@ -173,44 +172,50 @@ void MainWindow::refreshdate(){
 
     ui->label->setText(QDate::currentDate().toString("dddd dd MMMM yyyy"));
 }
-void MainWindow::archivio_(QDate date, QString name){
-    map1.insert(pair<QDate, QString>(date,name));
-
-
-}
-void MainWindow::archivio_2(QDate date, QString name){
-    map2.insert(pair<QDate, QString>(date,name));
-
-
-}
 
 void MainWindow::print_on_screen(){
-   // map1<int,multimap <QDate, QString>> :: iterator tr;
-    qDebug()<< "\nThe multimap element is : \n";
+
+    qDebug()<< "\nThe multimap of sterred events is : \n";
     qDebug()<< "\tKEY\tELEMENT\n";
-    for (auto itr = reg.begin(); itr != reg.end(); ++itr)
+    for ( auto itr = map1.begin(); itr != map1.end(); ++itr)
             {
                 qDebug()<<  '\t' << itr->first
                       <<  '\t' << itr->second << '\n';
             }
-            qDebug()<< endl;
+    qDebug()<< endl;
+    qDebug()<< "\nThe multimap element is : \n";
+    qDebug()<< "\tKEY\tELEMENT\n";
+    for ( auto itr = map2.begin(); itr != map2.end(); ++itr)
+            {
+                qDebug()<<  '\t' << itr->first
+                      <<  '\t' << itr->second << '\n';
+            }
+    qDebug()<< endl;
+}
 
+/*void MainWindow::multmap_order_66(QString name ){
+
+
+      multimap<QDate,QString>:: iterator itr= map1.find(QString name);
+            map1.erase(itr);
+
+}*/
+/*QString  MainWindow::multmap_search(int j){
+
+        for(auto itr=mapnames.begin();itr!= mapnames.end();++itr){
+        if(itr->first==j){
+             qDebug()<<itr->second;
+            return itr->second;
+        }
+    }
 }
 
 
-void MainWindow::registro(int i, std::multimap<QDate,QString>,QDate date, QString name){
-    if(i==1){
-        map1.insert(pair<QDate, QString>(date,name));
-    reg.insert(pair<int,std::multimap<QDate,QString>>(1,map1));
-
-    }
-    else{
-         map2.insert(pair<QDate, QString>(date,name));
-        reg.insert(pair<int,std::multimap<QDate,QString>>(2,map2));
-    }
+QDate MainWindow::multmap_search_date(int j){
+for(auto itr=mapdate.begin();itr!= mapdate.end();++itr){
+   if(itr->first==j){
+     qDebug()<<itr->second;
+    return itr->second;
+   }
 }
-
-
-
-
-
+}*/

@@ -27,12 +27,14 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     eventadder.cpp \
-    modifydial.cpp
+    modifydial.cpp \
+    observer.cpp
 
 HEADERS += \
         mainwindow.h \
     eventadder.h \
-    modifydial.h
+    modifydial.h \
+    observer.h
 
 FORMS += \
         mainwindow.ui \

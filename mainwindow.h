@@ -18,11 +18,8 @@ public:
 
     std::multimap<QDate,QString> map1;
     std::multimap<QDate,QString>map2;
-
-    std::multimap<int,std::multimap<QDate,QString>> reg;
-    void archivio_(QDate,QString);
-    void archivio_2(QDate,QString);
-    void registro(int i, std::multimap<QDate,QString>,QDate date, QString name);
+    std::multimap<int,QString> mapnames;
+    std::multimap<int,QDate> mapdate;
     int head_cols=6;
 
 
@@ -37,7 +34,13 @@ private slots:
     void on_toolButton_clicked();
     void refreshtime();
     void refreshdate();
-   void print_on_screen();
+    void print_on_screen();
+
+
+    void  multmap_order_66(QString name);
+    QString  multmap_search(int j);
+    QDate multmap_search_date(int j);
+
 
 private:
     Ui::MainWindow *ui;
