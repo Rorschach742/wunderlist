@@ -14,6 +14,8 @@ class eventadder : public QDialog
 public:
     explicit eventadder(QWidget *parent = 0);
     ~eventadder();
+    QDate date_catch();
+    QString name();
 
 private:
     Ui::eventadder *ui;

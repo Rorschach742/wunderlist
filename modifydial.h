@@ -14,6 +14,13 @@ class modifydial : public QDialog
 public:
     explicit modifydial(QWidget *parent = 0);
     ~modifydial();
+    QString modify_name();
+    QDate date_catch();
+
+private slots:
+    void on_buttonBox_accepted();
+
+    void on_buttonBox_rejected();
 
 private:
     Ui::modifydial *ui;

@@ -25,10 +25,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    eventadder.cpp \
+    modifydial.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    eventadder.h \
+    modifydial.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    eventadder.ui \
+    modifydial.ui
