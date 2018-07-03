@@ -7,6 +7,7 @@ modifydial::modifydial(QWidget *parent) :
 {
     ui->setupUi(this);
      setWindowTitle("Modify what you need");
+     ui->dateEdit->setDate(QDate::currentDate());
 }
 
 modifydial::~modifydial()
@@ -41,3 +42,14 @@ QDate modifydial::date_catch(){
 
 
 
+
+bool modifydial::on_radioButton_clicked()
+{
+  if(ui->radioButton->isChecked()==true ){
+      return true;
+    }
+  else{
+
+      return false;
+    }
+}

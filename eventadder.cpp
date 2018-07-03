@@ -6,7 +6,7 @@ eventadder::eventadder(QWidget *parent) :
     ui(new Ui::eventadder)
 {
     ui->setupUi(this);
-    QString d=QDate::currentDate().toString("dd/MM/yyyy");
+   //QString d=QDate::currentDate().toString("dd/MM/yyyy");
     ui->dateEdit->setDate(QDate::currentDate());
 }
 

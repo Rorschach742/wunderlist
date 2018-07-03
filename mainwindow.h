@@ -2,7 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <map>
+
+#include "category_man.h"
+
 using namespace std;
 namespace Ui {
 class MainWindow;
@@ -15,12 +17,8 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-
-    std::multimap<QDate,QString> map1;
-    std::multimap<QDate,QString>map2;
-    std::multimap<int,QString> mapnames;
-    std::multimap<int,QDate> mapdate;
     int head_cols=6;
+    category_man cat;
 
 
 private slots:
@@ -37,9 +35,7 @@ private slots:
     void print_on_screen();
 
 
-    void  multmap_order_66(QString name);
-    QString  multmap_search(int j);
-    QDate multmap_search_date(int j);
+
 
 
 private:

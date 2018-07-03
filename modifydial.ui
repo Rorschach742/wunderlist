@@ -13,16 +13,26 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>20</x>
      <y>30</y>
      <width>351</width>
-     <height>91</height>
+     <height>123</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout_3">
+    <item row="2" column="0">
+     <widget class="QDialogButtonBox" name="buttonBox">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="standardButtons">
+       <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+      </property>
+     </widget>
+    </item>
     <item row="0" column="0">
      <layout class="QGridLayout" name="gridLayout_2">
       <item row="0" column="0">
@@ -45,12 +55,9 @@
      </layout>
     </item>
     <item row="1" column="0">
-     <widget class="QDialogButtonBox" name="buttonBox">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="standardButtons">
-       <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     <widget class="QRadioButton" name="radioButton">
+      <property name="text">
+       <string>mark as starred</string>
       </property>
      </widget>
     </item>

@@ -17,10 +17,13 @@ public:
     QString modify_name();
     QDate date_catch();
 
+    bool on_radioButton_clicked();
+
 private slots:
     void on_buttonBox_accepted();
 
     void on_buttonBox_rejected();
+
 
 private:
     Ui::modifydial *ui;
