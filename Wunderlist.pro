@@ -28,7 +28,6 @@ SOURCES += \
         mainwindow.cpp \
     eventadder.cpp \
     modifydial.cpp \
-    observer.cpp \
     event.cpp \
     category_man.cpp
 
@@ -38,7 +37,8 @@ HEADERS += \
     modifydial.h \
     observer.h \
     event.h \
-    category_man.h
+    category_man.h \
+    subject.h
 
 FORMS += \
         mainwindow.ui \

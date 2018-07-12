@@ -2,7 +2,6 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-
 #include "category_man.h"
 
 using namespace std;
@@ -10,7 +9,7 @@ namespace Ui {
 class MainWindow;
 }
 
-class MainWindow : public QMainWindow
+class MainWindow : public QMainWindow, public Observer
 {
     Q_OBJECT
 
@@ -19,7 +18,11 @@ public:
     ~MainWindow();
     int head_cols=6;
     category_man cat;
-     int free_slot(int c);
+    int free_slot(int c);
+    void delete_from_starred(QString star_event);
+    void update() override;
+    void attach() override;
+    void detach() override;
 
 private slots:
     void on_tableWidget_cellDoubleClicked(int row, int column);
@@ -34,8 +37,12 @@ private slots:
 
 
 
+
+    void on_pushButton_4_clicked();
+
 private:
     Ui::MainWindow *ui;
+    Subject * sub;
 };
 
 #endif // MAINWINDOW_H

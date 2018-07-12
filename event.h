@@ -2,7 +2,7 @@
 #define EVENT_H
 #include <QString>
 #include <QDate>
-
+#include "subject.h"
 class Event
 {
 public:
@@ -40,7 +40,8 @@ public:
      int cat_id;
 private:
      QString ev_name;
-     bool starred,completed;
+     bool starred;
+     bool completed;
 
 
 };
