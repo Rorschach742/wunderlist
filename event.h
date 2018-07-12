@@ -6,7 +6,7 @@
 class Event
 {
 public:
-  Event(QDate date, QString ev_name, bool starred, bool completed, int posx, int posy);
+  Event(QString ev_name, bool starred, bool completed,int id);
      ~Event();
 
      bool isStarred() const {
@@ -17,13 +17,6 @@ public:
          Event::starred = starred;
      }
 
-     const QDate &getDate() const {
-         return date;
-     }
-
-     void setDate(const QDate &date) {
-         Event::date = date;
-     }
 
      const QString &getEv_name() const {
          return ev_name;
@@ -59,17 +52,17 @@ public:
      }
 
 
-     void setta_posx(int d);
-     void setta_posy(int d);
-     void setta_completed(bool comp);
-     void details();
 
+     void setta_completed(bool comp);
+     QString name_ret();
+     int cat_id_ret();
+     int cat_id;
 
 
 
 
 private:
-     QDate date;
+
      QString ev_name;
      bool starred,completed;
      int posX,posY;

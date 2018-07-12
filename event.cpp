@@ -2,23 +2,14 @@
 #include <QString>
 #include <QDate>
 #include <QDebug>
-Event::Event(QDate date, QString ev_name, bool starred , bool completed, int posx, int posy): date(date), ev_name(ev_name),starred(starred),
-                                                                                              completed(completed),posX(posx), posY(posy)
-{
-
-
-}
-Event::~Event(){
-
-}
+Event::Event(QString ev_name, bool starred , bool completed, int id): ev_name(ev_name),starred(starred),completed(completed),cat_id(id){}
+Event::~Event(){}
 
 void Event::setta_completed(bool comp){completed=comp;}
 
-void Event::setta_posx(int d){posX=d;}
-void Event::setta_posy(int d){posY=d;}
 
-void Event::details(){
+QString Event::name_ret(){
+  QString nome=ev_name;
+  return nome;}
 
-  qDebug()<<date<<"\n"<<ev_name<<"\n"<<starred<<"\n";
-}
-
+int Event::cat_id_ret(){return cat_id;}

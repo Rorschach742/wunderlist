@@ -1,7 +1,7 @@
 #include "category_man.h"
 
-void category_man::appaia(int col, Event  n) {
+void category_man::appaia(QDate date, Event  n) {
 
-    archivio.insert(std::pair<int,Event>(col, n));
+    archivio.insert(std::pair<QDate,Event>(date, n));
 
 }

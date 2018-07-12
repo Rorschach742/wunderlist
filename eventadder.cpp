@@ -27,3 +27,4 @@ QString eventadder::name(){
         return ui->lineEdit->text();
     }
 }
+

@@ -8,8 +8,10 @@
 class category_man{
 
 public:
-  std::multimap<int, Event> archivio;
-  void appaia(int col, Event e);
+  std::multimap<QDate, Event> archivio;
+
+  void appaia(QDate date, Event e);
+  
 
 
 };

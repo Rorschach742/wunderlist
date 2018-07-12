@@ -16,15 +16,15 @@
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>30</y>
-     <width>375</width>
+     <x>11</x>
+     <y>32</y>
+     <width>371</width>
      <height>111</height>
     </rect>
    </property>
-   <layout class="QGridLayout" name="gridLayout_3">
+   <layout class="QGridLayout" name="gridLayout_2">
     <item row="0" column="0">
-     <layout class="QGridLayout" name="gridLayout_2">
+     <layout class="QGridLayout" name="gridLayout">
       <item row="0" column="0">
        <widget class="QLabel" name="label">
         <property name="text">
@@ -33,41 +33,37 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <layout class="QGridLayout" name="gridLayout">
-        <item row="0" column="0">
-         <widget class="QLineEdit" name="lineEdit"/>
-        </item>
-        <item row="1" column="0">
-         <widget class="QDateEdit" name="dateEdit">
-          <property name="maximumDate">
-           <date>
-            <year>2030</year>
-            <month>1</month>
-            <day>1</day>
-           </date>
-          </property>
-          <property name="minimumDate">
-           <date>
-            <year>2018</year>
-            <month>6</month>
-            <day>26</day>
-           </date>
-          </property>
-          <property name="currentSection">
-           <enum>QDateTimeEdit::YearSection</enum>
-          </property>
-          <property name="displayFormat">
-           <string>dd/MM/yyyy</string>
-          </property>
-          <property name="calendarPopup">
-           <bool>true</bool>
-          </property>
-          <property name="currentSectionIndex">
-           <number>2</number>
-          </property>
-         </widget>
-        </item>
-       </layout>
+       <widget class="QLineEdit" name="lineEdit"/>
+      </item>
+      <item row="1" column="1">
+       <widget class="QDateEdit" name="dateEdit">
+        <property name="maximumDate">
+         <date>
+          <year>2030</year>
+          <month>1</month>
+          <day>1</day>
+         </date>
+        </property>
+        <property name="minimumDate">
+         <date>
+          <year>2018</year>
+          <month>6</month>
+          <day>26</day>
+         </date>
+        </property>
+        <property name="currentSection">
+         <enum>QDateTimeEdit::YearSection</enum>
+        </property>
+        <property name="displayFormat">
+         <string>dd/MM/yyyy</string>
+        </property>
+        <property name="calendarPopup">
+         <bool>true</bool>
+        </property>
+        <property name="currentSectionIndex">
+         <number>2</number>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>

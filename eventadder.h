@@ -17,6 +17,7 @@ public:
     QDate date_catch();
     QString name();
 
+
 private:
     Ui::eventadder *ui;
 };
