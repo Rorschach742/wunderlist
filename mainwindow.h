@@ -19,6 +19,7 @@ public:
     ~MainWindow();
     int head_cols=6;
     category_man cat;
+     int free_slot(int c);
 
 private slots:
     void on_tableWidget_cellDoubleClicked(int row, int column);
@@ -29,14 +30,9 @@ private slots:
     void refreshtime();
     void refreshdate();
     void print_on_screen();
-    void delete_from_gui();
     void ordering(int f);
-    int free_slot(int c);
 
 
-
-
-    void on_pushButton_4_clicked();
 
 private:
     Ui::MainWindow *ui;

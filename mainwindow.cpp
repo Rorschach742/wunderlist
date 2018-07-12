@@ -61,12 +61,14 @@ void MainWindow::on_tableWidget_cellDoubleClicked(int row, int column)
         auto f=ui->tableWidget->item(i,ui->tableWidget->currentColumn());
         if(!f|| f->text().isEmpty()){
             ui->tableWidget->setItem(i, column, new QTableWidgetItem(name));
-            std::unique_ptr<Event>mypoint( new Event (name,false,false,column));
-            cat.appaia(date_catch,*mypoint);
+            //std::unique_ptr<Event>mypoint( new Event (name,false,false,column));
+            Event *e=new Event(name,false,false,column);
+            cat.appaia(date_catch,*e);
+            delete e;
             break;
             }
       }
-
+ordering(ui->tableWidget->currentColumn());
 }
 
 void MainWindow::on_toolButton_clicked()
@@ -74,22 +76,29 @@ void MainWindow::on_toolButton_clicked()
   auto iter=cat.archivio.begin();
   const auto end=cat.archivio.end();
   int i=0;
+  QString find_my_string;
 while(iter!= end){
-//int cc=iter->second.cat_id_ret();
-if(iter->second.name_ret()==ui->tableWidget->item(i,ui->tableWidget->currentColumn())->text()){
-cat.archivio.erase(iter);
+    QString m=iter->second.name_ret();
+    QString n=ui->tableWidget->item(i,ui->tableWidget->currentColumn())->text();
+   if(m==n){
+        cat.archivio.erase(iter++);
+        find_my_string=n;
 
-  ++iter;
-  i++;
-  }
-else{
-    ++iter;
+        i++;
+      }
+    else{
 
-  }
+        ++i;
+      }
 }
 for(int i=0;i<ui->tableWidget->rowCount();++i){
-
     ui->tableWidget->setItem(i,ui->tableWidget->currentColumn(), new QTableWidgetItem(""));
+  }
+for(int u=0;u<ui->tableWidget->rowCount();++u){
+    if(ui->tableWidget->item(u,0)->text()==find_my_string){
+         ui->tableWidget->setItem(u,0,new QTableWidgetItem(""));
+
+      }
 
   }
 }
@@ -105,39 +114,76 @@ void MainWindow::on_pushButton_clicked()
   date_as_qdate=dial.date_catch();
   date_as_str=dial.date_catch().toString();
   chec_starred_state=dial.on_radioButton_clicked();
-  int row,col;
-  col=ui->tableWidget->currentColumn();
-  row=ui->tableWidget->currentRow();
+  int col;
+  col=ui->tableWidget->currentColumn(); 
   if(new_name=="hello"){
             return;
         }
   else if(new_name!="hello" ){
       if(chec_starred_state){
-          for(int i=0;i<ui->tableWidget->rowCount();++i){
-               for(auto iter=cat.archivio.begin();iter!=cat.archivio.end();++iter){
-                   auto g=ui->tableWidget->item(i,col);
-                   if(!g|| g->text().isEmpty()){
-                           ui->tableWidget->setItem(i,0, new QTableWidgetItem(new_name));
-                           std::unique_ptr<Event>new_ev_ptr( new Event (new_name,true,false,col));
-                           cat.appaia(date_as_qdate,*new_ev_ptr);
-                           i=60;
-                         }
-                 }
-            }
+          auto it = cat.archivio.begin();
+          const auto end = cat.archivio.end();
+          int i=0;
+          int col=ui->tableWidget->currentColumn();
+         while (it != end)
+          {
+              QString m=it->second.name_ret();
+              QString n=ui->tableWidget->item(ui->tableWidget->currentRow(),col)->text();
+              if (m==n){
+                  cat.archivio.erase(it++);
+                  break;
+              }
+              else{
+                 ++it;
+                  ++i;
+              }
+          }
+         ui->tableWidget->setItem(ui->tableWidget->currentRow(),col,new QTableWidgetItem(""));
+         for(int i=0;i<ui->tableWidget->rowCount();++i){
+             auto f=ui->tableWidget->item(i,ui->tableWidget->currentColumn());
+             if(!f|| f->text().isEmpty()){
+                 int myslot=free_slot(0);
+                 ui->tableWidget->setItem(myslot, 0, new QTableWidgetItem(new_name));
+                 ui->tableWidget->setItem(i, col, new QTableWidgetItem(new_name));
+                // std::unique_ptr<Event>mypoint( new Event (new_name,true,false,col));
+                 Event *e=new Event(new_name,true,false,col);
+                 cat.appaia(date_as_qdate,*e);
+                 delete e;
+                 break;
+               }
+           }
         }
-      else{
-          for(int i=0;i<ui->tableWidget->rowCount();++i){
-              for(auto iter=cat.archivio.begin();iter!=cat.archivio.end();++iter){
-              auto g=ui->tableWidget->item(i,col);
-              if(!g|| g->text().isEmpty()){
-                  ui->tableWidget->setItem(i,col, new QTableWidgetItem(new_name));
-                  std::unique_ptr<Event>new_ev_ptr( new Event (new_name,true,false,col));
-                  cat.appaia(date_as_qdate,*new_ev_ptr);
-                  i=60;
+         else if(!chec_starred_state){
+          auto it = cat.archivio.begin();
+          const auto end = cat.archivio.end();
+          int i=0;
+          int col=ui->tableWidget->currentColumn();
+         while (it != end)
+          {
+              QString m=it->second.name_ret();
+              QString n=ui->tableWidget->item(ui->tableWidget->currentRow(),col)->text();
+              if (m==n){
+                  cat.archivio.erase(it++);
+                  break;
+              }
+              else{
+                 ++it;
+                  ++i;
+              }
+          }
+         ui->tableWidget->setItem(ui->tableWidget->currentRow(),col,new QTableWidgetItem(""));
+         for(int i=0;i<ui->tableWidget->rowCount();++i){
+             auto f=ui->tableWidget->item(i,ui->tableWidget->currentColumn());
+             if(!f|| f->text().isEmpty()){
 
-                }
-                }
-            }
+                 ui->tableWidget->setItem(i, col, new QTableWidgetItem(new_name));
+                 //std::unique_ptr<Event>mypoint( new Event (new_name,false,false,col));
+                  Event *e=new Event(new_name,false,false,col);
+                 cat.appaia(date_as_qdate,*e);
+                 delete e;
+                 break;
+               }
+           }
         }
     }
 }
@@ -148,15 +194,15 @@ void MainWindow::on_pushButton_2_clicked()
   const auto end = cat.archivio.end();
   int i=0;
   int col=ui->tableWidget->currentColumn();
+  QString find_my_string;
  while (it != end)
   {
       QString m=it->second.name_ret();
       QString n=ui->tableWidget->item(ui->tableWidget->currentRow(),col)->text();
-      int o=QString::compare(m,n,Qt::CaseInsensitive);
       if (m==n)
       {
           cat.archivio.erase(it++);
-
+          find_my_string=n;
           break;
 
       }
@@ -165,18 +211,14 @@ void MainWindow::on_pushButton_2_clicked()
          ++it;
           ++i;
       }
-  }/*
-  for(auto itr=cat.archivio.begin();itr!=cat.archivio.end();++itr){
-      QString m,n;
-      m=itr->second.name_ret();
-      n=ui->tableWidget->item(ui->tableWidget->currentRow(),col)->text();
-      if(m==n){
-          cat.archivio.erase(it++);
-break;
+  }
+ for(int u=0;u<ui->tableWidget->rowCount();++u){
+     if(ui->tableWidget->item(u,0)->text()==find_my_string){
+          ui->tableWidget->setItem(u,0,new QTableWidgetItem(""));
+          u=200;
+       }
 
-        }
-
-    }*/
+   }
  ui->tableWidget->setItem(ui->tableWidget->currentRow(),col,new QTableWidgetItem(""));
 
 }
@@ -215,27 +257,21 @@ void MainWindow::print_on_screen(){
     }
 
 }
-void MainWindow::delete_from_gui(){
-  int j=ui->tableWidget->currentColumn();
-  for(int i=0;i<ui->tableWidget->rowCount();++i){
-      ui->tableWidget->setItem(i,j,new QTableWidgetItem(""));
-    }
-}
+
 
 void MainWindow::ordering(int f){
 
   for(int i=0;i<ui->tableWidget->rowCount();++i){
       ui->tableWidget->setItem(i,f,new QTableWidgetItem(""));
     }
-
-          auto iter=cat.archivio.begin();
-          const auto end=cat.archivio.end();
-          int i=0;
-    while(iter!= end){
-        //int cc=iter->second.cat_id_ret();
-        if(iter->second.cat_id_ret()==f){
-        QString s=iter->second.name_ret();
-        ui->tableWidget->setItem(i,f,new QTableWidgetItem(s));
+  auto iter=cat.archivio.begin();
+  const auto end=cat.archivio.end();
+  int i=0;
+  while(iter!= end){
+      //int cc=iter->second.cat_id_ret();
+      if(iter->second.cat_id_ret()==f){
+          QString s=iter->second.name_ret();
+          ui->tableWidget->setItem(i,f,new QTableWidgetItem(s));
           ++iter;
           i++;
           }
@@ -246,18 +282,13 @@ void MainWindow::ordering(int f){
       }
 }
 
-
-void MainWindow::on_pushButton_4_clicked()
-{
-    ordering(ui->tableWidget->currentColumn());
-}
 int MainWindow::free_slot(int c){
   for(int i=0;i<ui->tableWidget->rowCount();++i){
       auto g=ui->tableWidget->item(i,c);
       if(!g|| g->text().isEmpty()){
           return i;
         }
-      else return NULL;
+
     }
 
 }

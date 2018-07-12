@@ -2,7 +2,11 @@
 #include <QString>
 #include <QDate>
 #include <QDebug>
-Event::Event(QString ev_name, bool starred , bool completed, int id): ev_name(ev_name),starred(starred),completed(completed),cat_id(id){}
+Event::Event(QString name, bool starred , bool completed, int id): ev_name(name),starred(starred),completed(completed),cat_id(id){
+
+
+
+}
 Event::~Event(){}
 
 void Event::setta_completed(bool comp){completed=comp;}

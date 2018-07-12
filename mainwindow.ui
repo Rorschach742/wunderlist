@@ -27,9 +27,9 @@
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>860</x>
-      <y>120</y>
-      <width>91</width>
+      <x>830</x>
+      <y>80</y>
+      <width>121</width>
       <height>25</height>
      </rect>
     </property>
@@ -48,7 +48,7 @@
      <rect>
       <x>970</x>
       <y>80</y>
-      <width>91</width>
+      <width>101</width>
       <height>25</height>
      </rect>
     </property>
@@ -56,25 +56,12 @@
      <string>delete event</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_4">
-    <property name="geometry">
-     <rect>
-      <x>860</x>
-      <y>80</y>
-      <width>91</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>add event</string>
-    </property>
-   </widget>
    <widget class="QToolButton" name="toolButton">
     <property name="geometry">
      <rect>
-      <x>970</x>
+      <x>830</x>
       <y>120</y>
-      <width>91</width>
+      <width>241</width>
       <height>24</height>
      </rect>
     </property>
@@ -91,7 +78,7 @@
      <enum>QToolButton::InstantPopup</enum>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>820</x>
@@ -117,7 +104,7 @@
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>825</x>
@@ -139,7 +126,7 @@
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>860</x>
