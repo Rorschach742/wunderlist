@@ -3,6 +3,7 @@
 #include <QDebug>
 void category_man::appaia(QDate date, Event  n) {
     archivio.insert(std::pair<QDate,Event>(date, n));
+    notify();
 }
 
 void category_man::subscribe(Observer *o) {
@@ -19,14 +20,7 @@ void category_man::notify() {
     }
 
 }
-void category_man::n_update(){
-  first+=first;
-  notify();
-}
-void category_man::n_update2(){
-  second+=second;
-  notify();
-}
+
 bool category_man::delete_event(QString gui_string){
   auto it = archivio.begin();
     const auto end = archivio.end();
@@ -58,12 +52,7 @@ bool category_man::delete_event(QString gui_string){
           }
       }
 }
-void category_man::delete_all_events(){
 
-
-
-
-}
 void category_man::details(){
    qDebug()<< "****************************************"
                 "\nThe multimap of starred events is : \n";
@@ -90,4 +79,26 @@ QStringList category_man::ordered_gui(int col){
     }
 
 return mylist;
+}
+
+int category_man::count_ev(){
+  int a=0;
+  for(auto it=archivio.begin();it!=archivio.end();++it){
+      ++a;
+    }
+
+  return a;
+}
+
+
+int category_man::count_star_ev(){
+  int b=0;
+  for(auto it=archivio.begin();it!=archivio.end();++it){
+      if(it->second.isStarred()==true){
+          ++b;
+        }
+    }
+
+  return b;
+
 }

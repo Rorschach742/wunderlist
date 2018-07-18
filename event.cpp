@@ -11,3 +11,5 @@ QString Event::name_ret(){
 }
 
 int Event::cat_id_ret(){return cat_id;}
+
+

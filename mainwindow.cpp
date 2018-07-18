@@ -11,13 +11,15 @@
 #include "eventadder.h"
 #include "modifydial.h"
 #include "event.h"
-
+#include "category_man.h"
 using namespace std;
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
-
    ui->setupUi(this);
+
    QTimer *timer = new QTimer(this);
+  cat.subscribe(this);
+
    timer->start(1000);
    QTime time = QTime::currentTime();
    QStringList cols_description=(QStringList()<<"Starred"<<"Work"<<"Birthday"<<"Meeting"<<"Anniversary"<<"Sport");
@@ -31,6 +33,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
    ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
    ui->tableWidget->setSelectionMode(QAbstractItemView::SingleSelection);
    connect(timer, SIGNAL(timeout()), this , SLOT(refreshtime()));
+
 
 }
 
@@ -59,6 +62,7 @@ void MainWindow::on_tableWidget_cellDoubleClicked(int row, int column)
             Event *e=new Event(name,false,false,column);
             cat.appaia(date_catch,*e);
             delete e;
+
             break;
             }
       }
@@ -84,7 +88,7 @@ for(int r=0;r<list_to_del.length();++r){
         delete_from_starred(del);
       }
   }
-
+update();
 }
 
 void MainWindow::on_pushButton_clicked()
@@ -134,6 +138,7 @@ void MainWindow::on_pushButton_clicked()
         }
     }
   ordering(ui->tableWidget->currentColumn());
+  update();
 }
 
 void MainWindow::on_pushButton_2_clicked()
@@ -145,6 +150,7 @@ void MainWindow::on_pushButton_2_clicked()
       delete_from_starred(del_from_starred);
     }
  ordering(ui->tableWidget->currentColumn());
+  update();
 }
 
 void MainWindow::on_pushButton_3_clicked()
@@ -218,15 +224,19 @@ void MainWindow::delete_from_starred(QString star_event){
     }
 
 }
+
 void MainWindow::update(){
-  this->cat.n_update();
+  int a=cat.count_ev();
+  int b=cat.count_star_ev();
+  ui->lcdNumber->display(a);
+  ui->lcdNumber_2->display(b);
 
 }
 void MainWindow::attach(){
-
+sub->subscribe(this);
 }
 void MainWindow::detach(){
-
+sub->unsubscribe(this);
 }
 
 void MainWindow::on_pushButton_4_clicked()

@@ -14,15 +14,15 @@ class MainWindow : public QMainWindow, public Observer
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = 0);
+    explicit MainWindow( QWidget *parent = 0);
     ~MainWindow();
     int head_cols=6;
     category_man cat;
     int free_slot(int c);
     void delete_from_starred(QString star_event);
-    void update() override;
-    void attach() override;
-    void detach() override;
+    virtual void update() override;
+    virtual void attach() override ;
+    virtual void detach() override;
 
 private slots:
     void on_tableWidget_cellDoubleClicked(int row, int column);
@@ -43,6 +43,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     Subject * sub;
+
 };
 
 #endif // MAINWINDOW_H
